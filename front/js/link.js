@@ -1,7 +1,7 @@
 const bootstrap = require("bootstrap");
 const request = require("./request.js");
 
-class Album {
+class Link {
   constructor(modal) {
     this.modal = new bootstrap.Modal(modal);
   }
@@ -12,11 +12,11 @@ class Album {
 
   async edit(id) {
     try {
-      let result = await request("get", `/album/edit?id=${id}`);
+      let result = await request("get", `/link/edit?id=${id}`);
 
       if (result.response.ok && result.result) {
-        let album = result.result;
-        if (album.id) {
+        let link = result.result;
+        if (link.id) {
           document.querySelector("#album-id").value = album.id;
           document.querySelector("#album-name").value = album.name;
           document.querySelector("#album-tieser").value = album.tieser;
@@ -35,7 +35,7 @@ class Album {
         const formData = new FormData();
         formData.append("id", id);
 
-        let result = await request("post", "/album/delete", formData);
+        let result = await request("post", "/link/delete", formData);
 
         if (result.response.ok && !result.result.error) {
           window.location.reload();
@@ -46,10 +46,16 @@ class Album {
     }
   }
 
+  submit() {
+    document.querySelector("#link-form").submit();
+  }
+
+  copy() { }
+
   closeModal() {
-    document.getElementById("album-form").reset();
+    document.getElementById("link-form").reset();
     this.modal.hide();
   }
 }
 
-module.exports = Album;
+module.exports = Link;

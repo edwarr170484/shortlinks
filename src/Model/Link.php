@@ -39,14 +39,35 @@ class Link extends Model
         return count($links) > 0 ? $links[0] : null;
     }
 
+    public function findByShort($short)
+    {
+        $links = [];
+
+        $short = htmlspecialchars($short);
+
+        $results = $this->manager->prepared("SELECT * FROM $this->table WHERE short=?", [$short]);
+
+        if(count($results) > 0)
+        {
+            $links = $this->process($results);
+        }
+
+        return count($links) > 0 ? $links[0] : null;
+    }
+
+    public function isShortExists($short)
+    {
+        return ($this->findByShort($short)) ? true : false;
+    }
+
     public function add($values)
     {
-        return $this->manager->prepared("INSERT INTO $this->table (origin, short) values (?, ?)", $values);
+        return $this->manager->prepared("INSERT INTO $this->table (name, origin, short) values (?, ?, ?)", $values);
     }
 
     public function edit($values)
     {
-        return $this->manager->prepared("UPDATE $this->table SET origin=?, short=?, stat=?, date_updated=current_timestamp() WHERE id=?", $values);
+        return $this->manager->prepared("UPDATE $this->table SET name=?, origin=?, short=?, stat=?, date_updated=current_timestamp() WHERE id=?", $values);
     }
 
     public function delete($id, $rootDir)
@@ -65,6 +86,7 @@ class Link extends Model
             
             $links[] = [
                 "id"     => $result["id"],
+                "name"   => $result["name"],
                 "origin" => $result["origin"],
                 "short"  => $result["short"],
                 "stat"   => $result["stat"],

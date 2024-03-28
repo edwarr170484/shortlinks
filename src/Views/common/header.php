@@ -16,7 +16,6 @@
 </head>
 <body class="d-flex flex-column h-100">
 <header>
-  <!-- Fixed navbar -->
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center gap-1" href="/">
@@ -27,7 +26,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse ml-auto flex-grow-0" id="navbarCollapse">
-        <button class="btn btn-outline-success" type="submit" onclick="album.add()">Добавить ссылку</button>
+        <button class="btn btn-outline-success" type="submit" onclick="link.add()">Добавить ссылку</button>
       </div>
     </div>
   </nav>

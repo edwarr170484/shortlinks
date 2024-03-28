@@ -16,6 +16,6 @@ class MainController extends Controller
 
     public function index(Request $request)
     {
-        return $this->render("index.php", ["title" => "Главная страница", "header" => "Мои ссылки", "links" => $this->model->link->findAll()]);
+        return $this->render("index.php", ["title" => "Главная страница", "header" => "Мои ссылки", "server" => $request->domain(), "links" => $this->model->link->findAll()]);
     }
 }

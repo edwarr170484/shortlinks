@@ -9,8 +9,8 @@ $routes = [
     ],
     [
         "method"     => "post",
-        "uri"        => "/album/delete",
-        "controller" => "AlbumController",
-        "handler"    => "delete"
+        "uri"        => "/link/edit",
+        "controller" => "LinkController",
+        "handler"    => "edit"
     ]
 ];

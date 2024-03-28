@@ -1,7 +1,3 @@
-const Album = require("./album.js");
+const Link = require("./link.js");
 
-window.album = new Album("#albumModal");
-
-document.addEventListener("DOMContentLoaded", (event) => {
-
-});
+window.link = new Link("#linkModal");
