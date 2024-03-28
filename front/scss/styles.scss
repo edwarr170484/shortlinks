@@ -1,0 +1,59 @@
+/* Bootstrap part start */
+// Required
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+/* Bootstrap part end */
+
+/* responsive font size start */
+@import "../../node_modules/rfs/scss";
+/* responsive font size end */
+
+/* import vendor styles start */
+@import "./vendor/normalize.css";
+/* import vendor styles end */
+
+/* connect fonts start */
+@import "../fonts/fontawesome/faces.min.css";
+@import "../fonts/open_sans/faces.css";
+/* connect fonts end */
+
+@import "./variables";
+@import "./tools/breakpoints";
+
+@include root();
+
+@import "./parts/index";
+
+/* root styles start */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: var(--font-family-o);
+  color: var(--color-textBlack);
+  scroll-behavior: smooth;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  @media (min-width: 1400px) {
+    max-width: 1350px;
+  }
+
+  @media (max-width: 1350px) {
+    max-width: 100%;
+  }
+}
+
+main {
+  &>.container {
+    padding: 60px 15px 0;
+  }
+}
+
+/* root styles end */

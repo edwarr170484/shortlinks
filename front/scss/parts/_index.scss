@@ -1,0 +1,15 @@
+.list-group {
+  &-item {
+    & .badge {
+      line-height: 1.3rem;
+    }
+    & a {
+      text-decoration: none;
+    }
+
+    & .btn-group {
+      bottom: 0;
+      right: 0;
+    }
+  }
+}

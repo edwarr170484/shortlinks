@@ -1,0 +1,18 @@
+{
+  "name": "edgar/shortlink",
+  "description": "Application to create short links",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "Shorts\\": "src/",
+      "Shorts\\Core\\": "vendor/framecore"
+    }
+  },
+  "authors": [
+    {
+      "name": "Edgar Zhiznevski",
+      "email": "edgarz@advansys.com"
+    }
+  ],
+  "minimum-stability": "beta"
+}
