@@ -67,12 +67,17 @@ class Link extends Model
 
     public function edit($values)
     {
-        return $this->manager->prepared("UPDATE $this->table SET name=?, origin=?, short=?, stat=?, date_updated=current_timestamp() WHERE id=?", $values);
+        return $this->manager->prepared("UPDATE $this->table SET name=?, origin=?, short=?, date_updated=current_timestamp() WHERE id=?", $values);
     }
 
     public function delete($id, $rootDir)
     {
         return $this->manager->prepared("DELETE FROM $this->table WHERE id=?", [intval($id)]);
+    }
+
+    public function stat($values)
+    {
+        return $this->manager->prepared("UPDATE $this->table SET stat=?, date_updated=current_timestamp() WHERE id=?", $values);
     }
 
     private function process($results)

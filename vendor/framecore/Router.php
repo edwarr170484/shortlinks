@@ -20,6 +20,11 @@ class Router
         {
             $route = $this->getRouteByUri($request->uri());
 
+            if(!$route)
+            {
+                $route = $this->getRouteByUri("");
+            }
+
             $class = "Shorts\\Controller\\" . $route["controller"];
             $controller = new $class;
             $controller->__construct();

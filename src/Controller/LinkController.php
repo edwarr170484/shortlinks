@@ -3,6 +3,7 @@ namespace Shorts\Controller;
 
 use Shorts\Core\Request;
 use Shorts\Core\Controller;
+use Shorts\Core\Application;
 
 use Shorts\Model\Link;
 
@@ -16,6 +17,8 @@ class LinkController extends Controller
 
     public function edit(Request $request)
     {
+        $message = '';
+
         if($request->server("REQUEST_METHOD") == "POST")
         {
             $id = $request->post("link-id");
@@ -36,13 +39,17 @@ class LinkController extends Controller
             if($id)
             {
                 $result = $this->model->link->edit([$name, $origin, $short, $id]);
+                $message = "Ссылка успешно сохранена";
             }
             else
             {
                 $result = $this->model->link->add([$name, $origin, $short]);
+                $message = "Ссылка успешно добавлена";
             }
 
-            $this->redirect("/");
+            $list = $this->renderView("list.php", ["server" => $request->domain(), "links" => $this->model->link->findAll()]);
+
+            return $this->json(['message' => $message, 'error' => 0, 'list' => $list]);
         }
 
         try
@@ -55,6 +62,27 @@ class LinkController extends Controller
         {
             return $this->json([]);
         }
+    }
+
+    public function delete(Request $request)
+    {
+        if($request->server("REQUEST_METHOD") == "POST")
+        {
+            try
+            {
+                $result = $this->model->link->delete($request->post("id"), Application::$config->root);
+
+                $list = $this->renderView("list.php", ["server" => $request->domain(), "links" => $this->model->link->findAll()]);
+
+                return $this->json(['message' => 'Ссылка успешно удалена', 'error' => 0, 'list' => $list]);
+            }
+            catch(\Throwable $e)
+            {
+                return $this->json(['message' => $e->getMessage(), 'error' => 1]);
+            }
+        }
+
+        return $this->json(['message' => '', 'error' => 1]);
     }
 
     public function exists(Request $request)

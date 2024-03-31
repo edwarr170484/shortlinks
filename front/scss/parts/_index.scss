@@ -1,15 +1,16 @@
 .list-group {
   &-item {
-    & .badge {
-      line-height: 1.3rem;
-    }
-    & a {
-      text-decoration: none;
-    }
+    position: relative;
 
     & .btn-group {
       bottom: 0;
       right: 0;
     }
   }
+}
+
+.toast {
+  position: absolute;
+  bottom: 40px;
+  right: 30px;
 }

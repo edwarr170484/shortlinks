@@ -11864,15 +11864,18 @@ textarea.form-control-lg {
   --jumbotron-padding-y: 3rem;
 }
 
-.list-group-item .badge {
-  line-height: 1.3rem;
-}
-.list-group-item a {
-  text-decoration: none;
+.list-group-item {
+  position: relative;
 }
 .list-group-item .btn-group {
   bottom: 0;
   right: 0;
+}
+
+.toast {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
 }
 
 /* root styles start */

@@ -25,6 +25,16 @@ class Controller
 
     public function render(string $view, array $params): Response
     {
+        $content = $this->renderView($view, $params);
+
+        $response = new Response($content);
+        $response->addHeader('Content-Type: text/html');
+
+        return $response;
+    }
+
+    public function renderView(string $view, array $params): string | null
+    {
         ob_start();
         
         if(count($params) > 0)
@@ -39,10 +49,7 @@ class Controller
         $content = ob_get_contents();
         ob_end_clean();
 
-        $response = new Response($content);
-        $response->addHeader('Content-Type: text/html');
-
-        return $response;
+        return $content;
     }
 
     public function renderRaw($data)
