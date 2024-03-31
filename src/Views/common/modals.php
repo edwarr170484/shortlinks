@@ -13,7 +13,7 @@
           </div>
           <div class="mb-3">
               <label for="link-origin" class="form-label">Длинная ссылка</label>
-              <input name="link-origin" type="url" class="form-control" id="link-origin" required>
+              <input name="link-origin" type="text" class="form-control" id="link-origin" required>
           </div>
           <div class="mb-3">
             <label for="link-short" class="form-label">Короткая ссылка</label>

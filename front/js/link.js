@@ -1,6 +1,7 @@
 const bootstrap = require("bootstrap");
 const request = require("./request.js");
 const Notify = require("./notify.js");
+const validate = require("./validate.js");
 
 class Link {
   constructor(modal) {
@@ -28,7 +29,7 @@ class Link {
           document.querySelector("#link-name").value = link.name;
           document.querySelector("#link-origin").value = link.origin;
           document.querySelector("#link-short").value = link.short;
-
+          validate(this.form);
           this.modal.show();
         }
       }
@@ -60,19 +61,19 @@ class Link {
 
   async submit() {
     try {
-      const formData = new FormData(document.getElementById("link-form"));
+      if (!validate(this.form)) {
+        const formData = new FormData(this.form);
 
-      let result = await request("post", "/link/edit", formData);
+        let result = await request("post", "/link/edit", formData);
 
-      if (result.response.ok && !result.result.error) {
-        this.list.innerHTML = result.result.list;
-        this.notify.show(result.result.message);
+        if (result.response.ok && !result.result.error) {
+          this.list.innerHTML = result.result.list;
+          this.notify.show(result.result.message);
+          this.closeModal();
+        }
       }
     } catch (error) {
       this.notify.show(error.message);
-    }
-    finally {
-      this.closeModal();
     }
   }
 
